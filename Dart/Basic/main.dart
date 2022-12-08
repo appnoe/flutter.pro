@@ -1,23 +1,40 @@
 void main(List<String> args) {
-  // explicitly typed
-  String output = "Dart";
-  print("Hello $output!");
+  // function with parameters
+  print(userInfo("Franz", 42));
+  // function with optional parameters
+  print(userInfoWithState("Joe", 23, true));
+  // function with optional parameters
+  print(userInfoWithState("Jane", 24));
 
-  // type inference - done right
-  var typeInference = "I'm a string"; // Change value, not type
-  // typeInference = 23; // won't work
-  print(typeInference);
+  // function with parentheses
+  print(yesOrNo(1));
 
-/*
-  // type inference - done wrong
-  dynamic typeInferenceDynamic =
-      "I'm a string"; // Change value and type - bad practice
-  typeInferenceDynamic = 23;
-  print(typeInferenceDynamic);
-  typeInferenceDynamic++;
-  print(typeInferenceDynamic);
-  typeInferenceDynamic = 'foo';
-  typeInferenceDynamic++;
-  print(typeInferenceDynamic);
-  */
+  // function with with arrow syntax
+  print(yesOrNoArrow(1));
 }
+
+// function with parameters
+String userInfo(String name, int age) {
+  return "$name is $age years old";
+}
+
+// function with optional parameters
+String userInfoWithState(String name, int age, [bool? isOnline]) {
+  if (isOnline != null) {
+    return "$name is $age years old (🟢)";
+  } else {
+    return "$name is $age years old (🔴)";
+  }
+}
+
+// function with parentheses
+bool yesOrNo(int a) {
+  if (a == 1) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// function with arrow syntax
+bool yesOrNoArrow(int a) => (a == 1) ? true : false;
