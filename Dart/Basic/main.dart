@@ -1,40 +1,46 @@
 void main(List<String> args) {
-  // function with parameters
-  print(userInfo("Franz", 42));
-  // function with optional parameters
-  print(userInfoWithState("Joe", 23, true));
-  // function with optional parameters
-  print(userInfoWithState("Jane", 24));
+  // typed list with integers
+  var ints = [1, 2, 3, 4];
+  ints.add(23);
+  // assignement error
+  // ints.add("foo");
+  print(ints);
 
-  // function with parentheses
-  print(yesOrNo(1));
+  // initialization of empty list
+  var intList = <int>[];
+  intList.add(23);
+  intList.add(42);
+  print(intList);
 
-  // function with with arrow syntax
-  print(yesOrNoArrow(1));
-}
+  // typed list with doubles
+  var doubles = [23.5, 42.5];
+  print(doubles);
 
-// function with parameters
-String userInfo(String name, int age) {
-  return "$name is $age years old";
-}
-
-// function with optional parameters
-String userInfoWithState(String name, int age, [bool? isOnline]) {
-  if (isOnline != null) {
-    return "$name is $age years old (🟢)";
-  } else {
-    return "$name is $age years old (🔴)";
+  // traditional for loop
+  for (var i = 0; i < ints.length; i++) {
+    print(ints[i]);
   }
-}
 
-// function with parentheses
-bool yesOrNo(int a) {
-  if (a == 1) {
-    return true;
-  } else {
-    return false;
-  }
-}
+  // foreach loop
+  ints.forEach((element) {
+    element = element + 1;
+    print("Element: $element");
+  });
 
-// function with arrow syntax
-bool yesOrNoArrow(int a) => (a == 1) ? true : false;
+  // map: change list elements
+  var quadInts = ints.map((e) => e * 2);
+  print(quadInts);
+
+  // mixed list
+  var mixedList = [1, 2, 3, "d"];
+  print(mixedList);
+  mixedList.forEach((element) {
+    // type error
+    // element = element + 1;
+    print("Element: $element");
+  });
+
+  // filter list with condition
+  var characters = mixedList.where((element) => element is int);
+  print(characters);
+}
