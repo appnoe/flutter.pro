@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:loggy/loggy.dart';
+
 class TVMazeSearchResult {
   double? score;
   Show? show;
@@ -88,12 +90,18 @@ class Show {
     averageRuntime = json['averageRuntime'];
     premiered = json['premiered'];
     officialSite = json['officialSite'];
-    schedule = json['schedule'] != null ? new Schedule.fromJson(json['schedule']) : null;
-    rating = json['rating'] != null ? new Rating.fromJson(json['rating']) : null;
+    schedule = json['schedule'] != null
+        ? new Schedule.fromJson(json['schedule'])
+        : null;
+    rating =
+        json['rating'] != null ? new Rating.fromJson(json['rating']) : null;
     weight = json['weight'];
-    network = json['network'] != null ? new Network.fromJson(json['network']) : null;
+    network =
+        json['network'] != null ? new Network.fromJson(json['network']) : null;
     dvdCountry = json['dvdCountry'];
-    externals = json['externals'] != null ? new Externals.fromJson(json['externals']) : null;
+    externals = json['externals'] != null
+        ? new Externals.fromJson(json['externals'])
+        : null;
     image = json['image'] != null ? new Image.fromJson(json['image']) : null;
     summary = json['summary'];
     updated = json['updated'];
@@ -187,7 +195,8 @@ class Network {
   Network.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    country = json['country'] != null ? new Country.fromJson(json['country']) : null;
+    country =
+        json['country'] != null ? new Country.fromJson(json['country']) : null;
     officialSite = json['officialSite'];
   }
 
@@ -239,7 +248,7 @@ class Externals {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['tvrage'] = this.tvrage;
     data['thetvdb'] = this.thetvdb;
     data['imdb'] = this.imdb;
@@ -255,6 +264,7 @@ class Image {
 
   Image.fromJson(Map<String, dynamic> json) {
     medium = json['medium'];
+    logDebug('Getting medium image url: $medium');
     original = json['original'];
   }
 
@@ -275,9 +285,12 @@ class Links {
 
   Links.fromJson(Map<String, dynamic> json) {
     self = json['self'] != null ? new Self.fromJson(json['self']) : null;
-    previousepisode =
-        json['previousepisode'] != null ? new Self.fromJson(json['previousepisode']) : null;
-    nextepisode = json['nextepisode'] != null ? new Self.fromJson(json['nextepisode']) : null;
+    previousepisode = json['previousepisode'] != null
+        ? new Self.fromJson(json['previousepisode'])
+        : null;
+    nextepisode = json['nextepisode'] != null
+        ? new Self.fromJson(json['nextepisode'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
