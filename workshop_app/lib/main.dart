@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -38,13 +39,52 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Table(
             children: [
               TableRow(children: [
-                Image.network('https://picsum.photos/250?image=1')
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 0.0, top: 12.0, right: 0.0, bottom: 0.0),
+                      child: Image.network('https://picsum.photos/250?image=1'),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(
+                          left: 0.0, top: 8.0, right: 0.0, bottom: 12.0),
+                      child: Text("Image 1"),
+                    )
+                  ],
+                )
               ]),
               TableRow(children: [
-                Image.network('https://picsum.photos/250?image=2')
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 0.0, top: 12.0, right: 0.0, bottom: 0.0),
+                      child: Image.network('https://picsum.photos/250?image=2'),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(
+                          left: 0.0, top: 8.0, right: 0.0, bottom: 12.0),
+                      child: Text("Image 2"),
+                    )
+                  ],
+                )
               ]),
               TableRow(children: [
-                Image.network('https://picsum.photos/250?image=3')
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 0.0, top: 12.0, right: 0.0, bottom: 0.0),
+                      child: Image.network('https://picsum.photos/250?image=3'),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(
+                          left: 0.0, top: 8.0, right: 0.0, bottom: 12.0),
+                      child: Text("Image 3"),
+                    )
+                  ],
+                )
               ])
             ],
           ),
