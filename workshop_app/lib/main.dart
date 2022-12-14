@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -35,12 +34,20 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Table(
-          children: [
-            TableRow(children: [Image.network('https://picsum.photos/250?image=1')]),
-            TableRow(children: [Image.network('https://picsum.photos/250?image=2')]),
-            TableRow(children: [Image.network('https://picsum.photos/250?image=3')])
-          ],
+        body: SingleChildScrollView(
+          child: Table(
+            children: [
+              TableRow(children: [
+                Image.network('https://picsum.photos/250?image=1')
+              ]),
+              TableRow(children: [
+                Image.network('https://picsum.photos/250?image=2')
+              ]),
+              TableRow(children: [
+                Image.network('https://picsum.photos/250?image=3')
+              ])
+            ],
+          ),
         ));
   }
 }
