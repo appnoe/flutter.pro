@@ -10,14 +10,14 @@ class TVMazeSearchResult {
 
   TVMazeSearchResult.fromJson(Map<String, dynamic> json) {
     score = json['score'];
-    show = json['show'] != null ? new Show.fromJson(json['show']) : null;
+    show = json['show'] != null ? Show.fromJson(json['show']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['score'] = this.score;
-    if (this.show != null) {
-      data['show'] = this.show!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['score'] = score;
+    if (show != null) {
+      data['show'] = show!.toJson();
     }
     return data;
   }
@@ -90,60 +90,58 @@ class Show {
     averageRuntime = json['averageRuntime'];
     premiered = json['premiered'];
     officialSite = json['officialSite'];
-    schedule = json['schedule'] != null
-        ? new Schedule.fromJson(json['schedule'])
-        : null;
-    rating =
-        json['rating'] != null ? new Rating.fromJson(json['rating']) : null;
+    schedule =
+        json['schedule'] != null ? Schedule.fromJson(json['schedule']) : null;
+    rating = json['rating'] != null ? Rating.fromJson(json['rating']) : null;
     weight = json['weight'];
     network =
-        json['network'] != null ? new Network.fromJson(json['network']) : null;
+        json['network'] != null ? Network.fromJson(json['network']) : null;
     dvdCountry = json['dvdCountry'];
     externals = json['externals'] != null
-        ? new Externals.fromJson(json['externals'])
+        ? Externals.fromJson(json['externals'])
         : null;
-    image = json['image'] != null ? new Image.fromJson(json['image']) : null;
+    image = json['image'] != null ? Image.fromJson(json['image']) : null;
     summary = json['summary'];
     updated = json['updated'];
-    lLinks = json['_links'] != null ? new Links.fromJson(json['_links']) : null;
+    lLinks = json['_links'] != null ? Links.fromJson(json['_links']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['url'] = this.url;
-    data['name'] = this.name;
-    data['type'] = this.type;
-    data['language'] = this.language;
-    data['genres'] = this.genres;
-    data['status'] = this.status;
-    data['runtime'] = this.runtime;
-    data['averageRuntime'] = this.averageRuntime;
-    data['premiered'] = this.premiered;
-    data['ended'] = this.ended;
-    data['officialSite'] = this.officialSite;
-    if (this.schedule != null) {
-      data['schedule'] = this.schedule!.toJson();
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['url'] = url;
+    data['name'] = name;
+    data['type'] = type;
+    data['language'] = language;
+    data['genres'] = genres;
+    data['status'] = status;
+    data['runtime'] = runtime;
+    data['averageRuntime'] = averageRuntime;
+    data['premiered'] = premiered;
+    data['ended'] = ended;
+    data['officialSite'] = officialSite;
+    if (schedule != null) {
+      data['schedule'] = schedule!.toJson();
     }
-    if (this.rating != null) {
-      data['rating'] = this.rating!.toJson();
+    if (rating != null) {
+      data['rating'] = rating!.toJson();
     }
-    data['weight'] = this.weight;
-    if (this.network != null) {
-      data['network'] = this.network!.toJson();
+    data['weight'] = weight;
+    if (network != null) {
+      data['network'] = network!.toJson();
     }
-    data['webChannel'] = this.webChannel;
-    data['dvdCountry'] = this.dvdCountry;
-    if (this.externals != null) {
-      data['externals'] = this.externals!.toJson();
+    data['webChannel'] = webChannel;
+    data['dvdCountry'] = dvdCountry;
+    if (externals != null) {
+      data['externals'] = externals!.toJson();
     }
-    if (this.image != null) {
-      data['image'] = this.image!.toJson();
+    if (image != null) {
+      data['image'] = image!.toJson();
     }
-    data['summary'] = this.summary;
-    data['updated'] = this.updated;
-    if (this.lLinks != null) {
-      data['_links'] = this.lLinks!.toJson();
+    data['summary'] = summary;
+    data['updated'] = updated;
+    if (lLinks != null) {
+      data['_links'] = lLinks!.toJson();
     }
     return data;
   }
@@ -178,8 +176,8 @@ class Rating {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['average'] = this.average;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['average'] = average;
     return data;
   }
 }
@@ -196,18 +194,18 @@ class Network {
     id = json['id'];
     name = json['name'];
     country =
-        json['country'] != null ? new Country.fromJson(json['country']) : null;
+        json['country'] != null ? Country.fromJson(json['country']) : null;
     officialSite = json['officialSite'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    if (this.country != null) {
-      data['country'] = this.country!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    if (country != null) {
+      data['country'] = country!.toJson();
     }
-    data['officialSite'] = this.officialSite;
+    data['officialSite'] = officialSite;
     return data;
   }
 }
@@ -226,10 +224,10 @@ class Country {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['code'] = this.code;
-    data['timezone'] = this.timezone;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    data['code'] = code;
+    data['timezone'] = timezone;
     return data;
   }
 }
@@ -249,9 +247,9 @@ class Externals {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['tvrage'] = this.tvrage;
-    data['thetvdb'] = this.thetvdb;
-    data['imdb'] = this.imdb;
+    data['tvrage'] = tvrage;
+    data['thetvdb'] = thetvdb;
+    data['imdb'] = imdb;
     return data;
   }
 }
@@ -269,9 +267,9 @@ class Image {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['medium'] = this.medium;
-    data['original'] = this.original;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['medium'] = medium;
+    data['original'] = original;
     return data;
   }
 }
@@ -284,25 +282,24 @@ class Links {
   Links({this.self, this.previousepisode, this.nextepisode});
 
   Links.fromJson(Map<String, dynamic> json) {
-    self = json['self'] != null ? new Self.fromJson(json['self']) : null;
+    self = json['self'] != null ? Self.fromJson(json['self']) : null;
     previousepisode = json['previousepisode'] != null
-        ? new Self.fromJson(json['previousepisode'])
+        ? Self.fromJson(json['previousepisode'])
         : null;
-    nextepisode = json['nextepisode'] != null
-        ? new Self.fromJson(json['nextepisode'])
-        : null;
+    nextepisode =
+        json['nextepisode'] != null ? Self.fromJson(json['nextepisode']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.self != null) {
-      data['self'] = this.self!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (self != null) {
+      data['self'] = self!.toJson();
     }
-    if (this.previousepisode != null) {
-      data['previousepisode'] = this.previousepisode!.toJson();
+    if (previousepisode != null) {
+      data['previousepisode'] = previousepisode!.toJson();
     }
-    if (this.nextepisode != null) {
-      data['nextepisode'] = this.nextepisode!.toJson();
+    if (nextepisode != null) {
+      data['nextepisode'] = nextepisode!.toJson();
     }
     return data;
   }
@@ -318,8 +315,8 @@ class Self {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['href'] = this.href;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['href'] = href;
     return data;
   }
 }
