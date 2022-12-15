@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:loggy/loggy.dart';
 import 'api/api.dart';
-import 'model/tvmazesearchresult.dart' as _model;
+import 'package:workshop_app/model/tvmazesearchresult.dart';
+import 'package:workshop_app/view/show_details.dart';
 import 'package:async/async.dart';
 
 void main() {
@@ -39,11 +40,11 @@ class _MyHomePageState extends State<MyHomePage> {
   var rows = <TableRow>[];
   String searchString = 'simpsons';
   final AsyncMemoizer _memoizer = AsyncMemoizer();
+  var apiData = <TVMazeSearchResult>[];
 
   @override
   void initState() {
     super.initState();
-    // _title = getValue();
     _loadData(searchString);
   }
 
@@ -53,8 +54,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   bool _loadData(String searchText) {
     _memoizer.runOnce(() async {
-      var apiData = Api().fetchShow(searchText);
-      apiData.then((value) {
+      var result = Api().fetchShow(searchText);
+      result.then((value) {
+        apiData = value!;
         setState(() {
           rows = buildTableRows(value);
         });
@@ -65,11 +67,26 @@ class _MyHomePageState extends State<MyHomePage> {
     return true;
   }
 
-  void _onTapImage(int id) {
-    logDebug("onTapImage: $id");
+  Show? _showWithID(int id) {
+    for (var i = 0; i < apiData.length; i++) {
+      if (apiData[i].show?.id == id) {
+        return apiData[i].show;
+      }
+    }
+    return null;
   }
 
-  List<TableRow> buildTableRows(List<_model.TVMazeSearchResult>? shows) {
+  void _onTapImage(int id) {
+    logDebug("onTapImage: $id");
+    var show = _showWithID(id);
+    if (show != null) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return ShowDetails(show: show);
+      }));
+    }
+  }
+
+  List<TableRow> buildTableRows(List<TVMazeSearchResult>? shows) {
     var rows = <TableRow>[];
     shows?.forEach((element) {
       logDebug('Image url: $element.show!.image!.medium!');
