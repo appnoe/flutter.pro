@@ -3,6 +3,7 @@ import 'package:transparent_image/transparent_image.dart';
 import 'package:loggy/loggy.dart';
 import 'api/api.dart';
 import 'model/tvmazesearchresult.dart' as Model;
+import 'package:async/async.dart';
 
 void main() {
   Loggy.initLoggy(
@@ -36,32 +37,36 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var rows = <TableRow>[];
-  late Future<String> _title;
   String searchString = 'simpsons';
+  final AsyncMemoizer _memoizer = AsyncMemoizer();
 
   @override
   void initState() {
     super.initState();
-    _title = getValue();
+    // _title = getValue();
     _loadData(searchString);
   }
 
-  void _loadData(String searchText) {
-    var apiData = Api().fetchShow(searchText);
-    apiData.then((value) {
-      setState(() {
-        rows = buildTableRows(value);
+  Future<bool> _loadDataWithoutSearchText() async {
+    return _loadData(searchString);
+  }
+
+  bool _loadData(String searchText) {
+    _memoizer.runOnce(() async {
+      var apiData = Api().fetchShow(searchText);
+      apiData.then((value) {
+        setState(() {
+          rows = buildTableRows(value);
+        });
+        return true;
       });
     });
+
+    return true;
   }
 
   void _onTapImage(int id) {
     logDebug("onTapImage: $id");
-  }
-
-  Future<String> getValue() async {
-    await Future.delayed(const Duration(seconds: 3));
-    return 'Flutter Devs';
   }
 
   List<TableRow> buildTableRows(List<Model.TVMazeSearchResult>? shows) {
@@ -155,8 +160,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ),
-        body: FutureBuilder<String>(
-          future: _title,
+        body: FutureBuilder<bool>(
+          future: _loadDataWithoutSearchText(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return SingleChildScrollView(

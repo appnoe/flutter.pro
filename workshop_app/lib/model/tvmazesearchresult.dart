@@ -107,7 +107,7 @@ class Show {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['url'] = url;
     data['name'] = name;
@@ -159,9 +159,9 @@ class Schedule {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['time'] = this.time;
-    data['days'] = this.days;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['time'] = time;
+    data['days'] = days;
     return data;
   }
 }
