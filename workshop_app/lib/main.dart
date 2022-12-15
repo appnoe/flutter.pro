@@ -4,6 +4,7 @@ import 'package:loggy/loggy.dart';
 import 'api/api.dart';
 import 'package:workshop_app/model/tvmazesearchresult.dart';
 import 'package:workshop_app/view/show_details.dart';
+import 'package:workshop_app/platform_channel/cryptokit.dart';
 import 'package:async/async.dart';
 
 void main() {
@@ -38,6 +39,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var rows = <TableRow>[];
+  static CryptoKit cryptoKit = CryptoKit();
   String searchString = 'simpsons';
   final AsyncMemoizer _memoizer = AsyncMemoizer();
   var apiData = <TVMazeSearchResult>[];
@@ -45,6 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    cryptoKit.getHash('simpsons');
     _loadData(searchString);
   }
 
@@ -89,7 +92,6 @@ class _MyHomePageState extends State<MyHomePage> {
   List<TableRow> buildTableRows(List<TVMazeSearchResult>? shows) {
     var rows = <TableRow>[];
     shows?.forEach((element) {
-      logDebug('Image url: $element.show!.image!.medium!');
       if (element.show!.image != null) {
         var row = TableRow(children: [
           Column(
