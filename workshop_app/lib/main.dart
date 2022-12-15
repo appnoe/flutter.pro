@@ -37,19 +37,26 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   var rows = <TableRow>[];
   late Future<String> _title;
+  String searchString = 'simpsons';
 
   @override
   void initState() {
     super.initState();
     _title = getValue();
-    var apiData = Api().fetchShow('simpsons');
+    _loadData(searchString);
+  }
+
+  void _loadData(String searchText) {
+    var apiData = Api().fetchShow(searchText);
     apiData.then((value) {
-      rows = buildTableRows(value);
+      setState(() {
+        rows = buildTableRows(value);
+      });
     });
   }
 
-  void onTapImage() {
-    logDebug("onTapImage");
+  void _onTapImage(int id) {
+    logDebug("onTapImage: $id");
   }
 
   Future<String> getValue() async {
@@ -73,7 +80,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       placeholder: kTransparentImage,
                       image: element.show!.image!.medium!,
                     ),
-                    onTap: onTapImage),
+                    onTap: () {
+                      _onTapImage(element.show!.id!);
+                    }),
               ),
               Padding(
                 padding: const EdgeInsets.only(
@@ -95,11 +104,56 @@ class _MyHomePageState extends State<MyHomePage> {
     return rows;
   }
 
+  Future<void> _displayTextInputDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Suche nach Filmen'),
+            content: TextField(
+              onChanged: (value) {
+                setState(() {
+                  searchString = value;
+                });
+              },
+              decoration: const InputDecoration(hintText: "Suchbegriff"),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Abbrechen'),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+              TextButton(
+                child: const Text('Suchen'),
+                onPressed: () {
+                  setState(() {
+                    _loadData(searchString);
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
+          leading: GestureDetector(
+            onTap: () {
+              _displayTextInputDialog(context);
+            },
+            child: const Icon(
+              Icons.search, // add custom icons also
+            ),
+          ),
         ),
         body: FutureBuilder<String>(
           future: _title,
