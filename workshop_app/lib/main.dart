@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:loggy/loggy.dart';
 import 'api/api.dart';
-import 'model/tvmazesearchresult.dart' as Model;
+import 'model/tvmazesearchresult.dart' as _model;
 import 'package:async/async.dart';
 
 void main() {
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
     logDebug("onTapImage: $id");
   }
 
-  List<TableRow> buildTableRows(List<Model.TVMazeSearchResult>? shows) {
+  List<TableRow> buildTableRows(List<_model.TVMazeSearchResult>? shows) {
     var rows = <TableRow>[];
     shows?.forEach((element) {
       logDebug('Image url: $element.show!.image!.medium!');
