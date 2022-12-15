@@ -6,6 +6,7 @@ import 'package:workshop_app/model/tvmazesearchresult.dart';
 import 'package:workshop_app/view/show_details.dart';
 import 'package:workshop_app/platform_channel/cryptokit.dart';
 import 'package:async/async.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 void main() {
   Loggy.initLoggy(
@@ -43,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String searchString = 'simpsons';
   final AsyncMemoizer _memoizer = AsyncMemoizer();
   var apiData = <TVMazeSearchResult>[];
+  bool _isOn = true;
 
   @override
   void initState() {
@@ -77,6 +79,13 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
     return null;
+  }
+
+  void _toggle() {
+    logDebug('_toggle');
+    setState(() {
+      _isOn = !_isOn;
+    });
   }
 
   void _onTapImage(int id) {
@@ -168,17 +177,28 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-          leading: GestureDetector(
-            onTap: () {
-              _displayTextInputDialog(context);
-            },
-            child: const Icon(
-              Icons.search, // add custom icons also
-            ),
-          ),
-        ),
+        appBar: AppBar(centerTitle: true, title: Text("TITLE"), actions: [
+          PlatformSwitch(
+              activeColor: Colors.black,
+              value: _isOn,
+              onChanged: (val) {
+                _toggle();
+                setState(() {
+                  _isOn = val;
+                });
+              }),
+        ]),
+        // AppBar(
+        //   title: Text(widget.title),
+        //   leading: GestureDetector(
+        //     onTap: () {
+        //       _displayTextInputDialog(context);
+        //     },
+        //     child: const Icon(
+        //       Icons.search, // add custom icons also
+        //     ),
+        //   ),
+        // ),
         body: FutureBuilder<bool>(
           future: _loadDataWithoutSearchText(),
           builder: (context, snapshot) {
